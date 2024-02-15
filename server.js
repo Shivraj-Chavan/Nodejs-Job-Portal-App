@@ -27,9 +27,16 @@ connectDB();
 //rest object
 const app=express()
 
+const options = {
+    strictTransportSecurity: {
+        maxAge: 31536000,             // The max age (in seconds) of the Strict-Transport-Security header
+        includeSubDomains: true,      // If true, apply this header to all subdomains of the current domain
+        preload: true                 // If true, indicates that the domain is prepared for preload list inclusion
+    }
+};
 
 //middelware
-app.use(helmet(``))
+app.use(helmet(options))
 app.use(xss())
 app.use(mongoSanitize())
 app.use(express.json())
